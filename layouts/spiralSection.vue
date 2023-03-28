@@ -206,9 +206,10 @@
     width: 100vw
     height: 100vh
     z-index: 99
-    opacity: 0.2
+    opacity: 0.3
     overflow: hidden
     background-image: url(./assets/background.svg)
+    background-size: 25vw
     pointer-events: none
     background-color: #000
   
