@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { del } from 'nuxt/dist/app/compat/capi';
 
   const icons = [
     "nuxt", "vue", "vite", "pinia",
