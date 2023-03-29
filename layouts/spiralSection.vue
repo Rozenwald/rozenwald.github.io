@@ -33,7 +33,7 @@
           description: '',
         },
         en: {
-          title: `Hi, my name is Laure.\nI'am Frontend developer.\nFrom Russia with love`,
+          title: `Hi, my name is Laure.\nI am Frontend developer.\nFrom Russia with love`,
           description: 'Code\nPrototype\nArchitecture',
         }
       }
@@ -57,7 +57,7 @@
           description: '',
         },
         en: {
-          title: `Welcome, my name is Laure. I'am Frontend developer. And this is my history `,
+          title: 'SlideContent',
           description: '',
         }
       }
@@ -69,7 +69,7 @@
           description: '',
         },
         en: {
-          title: `Welcome, my name is Laure. I'am Frontend developer. And this is my history `,
+          title: 'SlideContent',
           description: '',
         }
       }
@@ -81,7 +81,7 @@
           description: '',
         },
         en: {
-          title: `Welcome, my name is Laure. I'am Frontend developer. And this is my history `,
+          title: 'SlideContent',
           description: '',
         }
       }
@@ -93,7 +93,7 @@
           description: '',
         },
         en: {
-          title: `Welcome, my name is Laure. I'am Frontend developer. And this is my history `,
+          title: 'SlideContent',
           description: '',
         }
       }
@@ -105,7 +105,7 @@
           description: '',
         },
         en: {
-          title: `Welcome, my name is Laure. I'am Frontend developer. And this is my history `,
+          title: 'SlideContent',
           description: '',
         }
       }
