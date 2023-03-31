@@ -36,7 +36,7 @@
     margin: 0 !important
     min-height: 100vh
     overflow: hidden
-    background-color: var(--black)
+    background-color: #0B0B0B
     // background: url(./assets/back.jpg), 100% 100%, no-repeat
 
   #app

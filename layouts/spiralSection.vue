@@ -5,6 +5,7 @@
     v-for="(slide, index) in slides"
     :index="index"
     :data="slide.data"
+    :color="color"
     :active="(activeSlide == index) ? true : false"
   />
   <intro/>
@@ -24,7 +25,7 @@
   const goldenRatio = 0.618033 // Примерное значение золотого сечения
   let transformPos: { x: number; y: number; }
 
-  let color = ''
+  let color = '#fff'
   const slides = [
     {
       data: {
@@ -48,7 +49,7 @@
         title: 'Ответственный, Самостоятельный, Легкообучаемый',
         description: '',
         }
-      }
+      },
     },
     {
       data: {
@@ -111,10 +112,10 @@
       }
     },
   ]
-  const activeSlide = ref(0)
   const height = ref(0)
   const width = ref(0)
   
+  let activeSlide = ref(0)
   let scaleFactor = 1
   let gradus = 0
   let timeout: any 
@@ -135,6 +136,59 @@
     window.removeEventListener('whell', () => scrollHandler)
   })
 
+  watch(activeSlide, () => {
+    const slides = document.querySelector('.spiral') as HTMLElement
+    console.log(activeSlide.value)
+    switch (activeSlide.value) {
+      case 0:
+        slides.style.backgroundColor = '#0b0b0B'
+        color = '#fff'
+        console.log(slides.style.backgroundColor)
+        break;
+      case 1:
+        slides.style.backgroundColor = '#0b0b0B'
+        color = '#fff'
+        console.log(slides.style.backgroundColor) 
+        break;
+      case 2:
+        slides.style.backgroundColor = '#0B0B0B'
+        color = '#ffda44'
+        console.log(slides.style.backgroundColor)
+        break;
+      case 3:
+        slides.style.backgroundColor = '#E52127'
+        color = '#2f3436'
+        console.log(slides.style.backgroundColor)
+        break;
+      case 4:
+        slides.style.backgroundColor = '#356a85'
+        color = '#6ad4ff'
+        console.log(slides.style.backgroundColor)
+        break;
+      case 5:
+        slides.style.backgroundColor = '#52beac'
+        color = '#2c2435'
+        console.log(slides.style.backgroundColor)
+        break;
+      case 6:
+        slides.style.backgroundColor = '#fb6247'
+        color = '#271325'
+        console.log(slides.style.backgroundColor)
+        break;
+      case 7:
+        slides.style.backgroundColor = '#dbd1b7'
+        color = '#151a1e'
+        console.log(slides.style.backgroundColor)
+        break;
+      case 8:
+        slides.style.backgroundColor = '#0b0b0b'
+        color = '#fff'
+        break;
+      default: '#000'
+        break;
+    }
+  })
+
   function keyHandler(event: KeyboardEvent) {
     if ((event.key == 'ArrowUp') || (event.key == 'ArrowLeft')) {
       gradus += 90
@@ -149,7 +203,7 @@
       scaleFactor /= goldenRatio  
       const slides = document.querySelector('.spiral') as HTMLElement
       slides.style.transform = `scale(${scaleFactor})`
-      slides.style.transform += `rotate(${gradus}deg)`
+      slides.style.transform += `rotate(${gradus}deg)`  
       activeSlide.value += 1
     }
   }
@@ -206,18 +260,17 @@
     width: 100vw
     height: 100vh
     z-index: 99
-    opacity: 0.3
+    opacity: 0.1
     overflow: hidden
     background-image: url(./assets/background.svg)
-    background-size: 25vw
     pointer-events: none
-    background-color: #000
   
   .spiral
     position: absolute
     width: 100vw
     height: 100vh
     pointer-events: auto
+    background-color: #000
     &--1
       background-color: var(--blue)
     &--2

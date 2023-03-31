@@ -38,12 +38,11 @@
         description?: string,
       }
     }
-    color?: string
+    color: string
   }
   const props = withDefaults(defineProps<slideProp>(), {
     index: 0,
     active: false,
-    color: 'var(--grey)',
   })
 
   let w: number
@@ -59,6 +58,11 @@
     setSettings()
     window.addEventListener('resize', setSettings)
   })
+  watch(props, () => {
+      const settings = slide.value
+      settings.style.backgroundColor = props.color
+    }
+  )
 
   function setSettings() {
     const settings = slide.value
