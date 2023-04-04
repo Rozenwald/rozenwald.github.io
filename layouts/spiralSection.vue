@@ -14,6 +14,8 @@
 </template>
 
 <script setup lang="ts">
+  import space from '../assets/space.svg'
+  import wave from '../assets/wave.svg'
 
   const icons = [
     "nuxt", "vue", "vite", "pinia",
@@ -26,7 +28,7 @@
   let transformPos: { x: number; y: number; }
 
   let color = '#fff'
-  const slides = [
+  const slides = reactive([
     {
       data: {
         ru: {
@@ -34,8 +36,10 @@
           description: '',
         },
         en: {
-          title: `Hi, my name is Laure.\nI am Frontend developer.\nFrom Russia with love`,
-          description: 'Code\nPrototype\nArchitecture',
+          title: `Hi, my name is Laure.\nI am Frontend developer.`,
+          subtitle: `Turning Vision Into Reality With Code And Design.`,
+          description: 'Idea\nCode\nArchitecture',
+          icon: 'Rose'
         }
       }
     },
@@ -46,7 +50,7 @@
         description: '',
         },
         en: {
-        title: 'Ответственный, Самостоятельный, Легкообучаемый',
+        title: '',
         description: '',
         }
       },
@@ -54,11 +58,11 @@
     {
       data: {
         ru: {
-          title: `Привет, меня зовут Кирилл Кузнецов. Я Frontend developer. И это мой сайт портфолио `,
+          title: `Turning Vision Into Reality With Code And Design.`,
           description: '',
         },
         en: {
-          title: 'SlideContent',
+          title: '',
           description: '',
         }
       }
@@ -70,7 +74,7 @@
           description: '',
         },
         en: {
-          title: 'SlideContent',
+          title: '',
           description: '',
         }
       }
@@ -82,7 +86,7 @@
           description: '',
         },
         en: {
-          title: 'SlideContent',
+          title: '',
           description: '',
         }
       }
@@ -94,7 +98,7 @@
           description: '',
         },
         en: {
-          title: 'SlideContent',
+          title: '',
           description: '',
         }
       }
@@ -106,12 +110,12 @@
           description: '',
         },
         en: {
-          title: 'SlideContent',
+          title: '',
           description: '',
         }
       }
     },
-  ]
+  ])
   const height = ref(0)
   const width = ref(0)
   
@@ -121,19 +125,18 @@
   let timeout: any 
 
   onMounted(() => {
-    w = window.innerWidth
-    transformPos = calcTransformPosition()
-    const slides = document.querySelector('.spiral') as HTMLElement
-    slides.style.transition = 'all 0.5s linear 0s'
-    slides.style.transformOrigin = `${transformPos.x}px ${transformPos.y}px`
+    setSettings()
+    setBackground()
 
     window.addEventListener('keydown', keyHandler)
     window.addEventListener('wheel', scrollHandler)
+    window.addEventListener('resize', setSettings)
     // window.addEventListener('pointermove', scrollChanges)
   })
   onUnmounted(() => {
     window.removeEventListener('keydown', keyHandler)
     window.removeEventListener('whell', () => scrollHandler)
+    window.removeEventListener('resize', setSettings)
   })
 
   watch(activeSlide, () => {
@@ -188,6 +191,26 @@
         break;
     }
   })
+
+  function setSettings() {
+    const slides = document.querySelector('.spiral') as HTMLElement
+    w = window.innerWidth
+    transformPos = calcTransformPosition()
+
+    slides.style.transition = 'all 0.5s linear 0s'
+    slides.style.transformOrigin = `${transformPos.x}px ${transformPos.y}px`
+  }
+  function setBackground() {
+    const background = document.querySelector('.pattern') as HTMLElement
+    const random = Math.round(Math.random())
+    if (random == 1) {
+      console.log("space")
+      background.style.backgroundImage = `url(${space})`
+    } else {
+      console.log("background")
+      background.style.backgroundImage = `url(${wave})`
+    }
+  }
 
   function keyHandler(event: KeyboardEvent) {
     if ((event.key == 'ArrowUp') || (event.key == 'ArrowLeft')) {
@@ -262,7 +285,6 @@
     z-index: 99
     opacity: 0.1
     overflow: hidden
-    background-image: url(./assets/background.svg)
     pointer-events: none
   
   .spiral
@@ -271,15 +293,5 @@
     height: 100vh
     pointer-events: auto
     background-color: #000
-    &--1
-      background-color: var(--blue)
-    &--2
-      background-color: var(--yellow)
-    &--3
-      background-color: var(--ice)
-    &--4
-      background-color: var(--yellow)
-    &--5
-      background-color: var(--pink)
 
 </style>

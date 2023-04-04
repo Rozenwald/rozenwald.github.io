@@ -6,6 +6,7 @@
   >
     <div class="header">
       <div class="header__title"> {{ props.data.en.title }} </div>
+      <div class="header__subtitle"> {{ props.data.en.subtitle }} </div>  
     </div>
     <div class="body">
       <div class="body__description"> {{ props.data.en.description }} </div>
@@ -13,7 +14,10 @@
         class="body__btn"
         :class="{ active: active }"
       >
-        <img v-if="!active" src="~/assets/icons/Arrow.svg">
+        <div v-if="active && (index == 0)" class="body__btn-text" src="~/assets/icons/Arrow.svg">
+          Анимация
+        </div>
+        <img v-else-if="!active && (index != 0)" class="body__btn-img" src="~/assets/icons/Arrow.svg">
         <div v-else class="body__btn-text" src="~/assets/icons/Arrow.svg">
           View
         </div>
@@ -35,6 +39,7 @@
       en: {
         icon?: string,
         title?: string,
+        subtitle?: string,
         description?: string,
       }
     }
@@ -52,10 +57,8 @@
   const slide = ref()
 
   onMounted(() => {
-    w = window.innerWidth
-    transformPos = calcTransformPosition()
-
     setSettings()
+    setTransform()
     window.addEventListener('resize', setSettings)
   })
   watch(props, () => {
@@ -66,12 +69,18 @@
 
   function setSettings() {
     const settings = slide.value
-    //console.log(settings)
+    w = window.innerWidth
+    transformPos = calcTransformPosition()
     // Size
     settings.style.height = `${w * goldenRatio}px`
     settings.style.width = `${w * goldenRatio}px`
     // Transform-origin
     settings.style.transformOrigin = `${transformPos.x}px ${transformPos.y}px`
+  }
+
+  function setTransform() {
+    console.log('settings')
+    const settings = slide.value
     // Transform
     const scaleFactor = (goldenRatio ** props.index)
     settings.style.transform = `scale(${scaleFactor})`
@@ -86,7 +95,7 @@
     position: absolute
     display: flex
     flex-direction: column
-    align-items: center
+    align-items: self-start
     border: 1px solid var(--black)
     padding: 48px
     transition: 0.3s border-radius ease-out
@@ -100,12 +109,17 @@
         border-radius: 5px
 
   .header
-    width: 100%
+    width: 80%
     height: 50%
     &__title
       width: 100%
-      font-size: 32px
-      white-space: pre
+      font-size: 40px
+      white-space: pre-wrap
+    &__subtitle
+      width: 100%
+      margin: 16px 0
+      font-size: 24px
+      white-space: pre-wrap
   .body
     width: 100%
     height: 50%
@@ -119,7 +133,7 @@
       font-size: 40px
       font-weight: 700
       text-transform: uppercase
-      white-space: pre
+      white-space: pre-wrap
       color: #f8173e
     &__btn
       width: 30%
@@ -132,5 +146,8 @@
       width: 70%
     &__btn-text
       color: #fff
+    &__btn-img
+      width: 80%
+      height: 80%
 
 </style>
